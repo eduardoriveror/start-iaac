@@ -1,4 +1,4 @@
-### Start-iaac
+# Start-iaac
 
 This is a repository that allows you to create an EKS cluster using Jenkins in an EC2 instance as a CI/CD engine.
 
@@ -6,7 +6,7 @@ The jenkins folder itself is meant to be used as a pre-step to start a Jenkins i
 
 ## Prerequisites:
 
-# For Jenkins:
+### For Jenkins:
 - A hosted zone in route 53
 - An S3 bucket to store the remote state
 
@@ -19,7 +19,7 @@ The jenkins folder itself is meant to be used as a pre-step to start a Jenkins i
 
 ## Procedure
 
-# For Jenkins:
+### For Jenkins:
 - Setting up credentials AWS CLI credentials in your local environment (Programatic access key of a IAM user with an IAM policy attached to its group or an IAM role that it can assume)
 - Creating an SSH key pair in the root folder called jenkins-key with the following command
 ```
