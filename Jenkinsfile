@@ -8,13 +8,14 @@ pipeline {
         TF_IN_AUTOMATION = "true"
         AWS_ID = credentials("terraform-userpass")
         VAR_FILE = credentials("terraform.tfvars")
+        BUCKET  =   credentials("bucket-name")
     }
     agent {
         docker {
             label "docker"
             image "eduardoriveror/terragrunt-aws:v1.0"
             alwaysPull true
-            args  "--entrypoint='' -u root:sudo"
+            args  "--entrypoint='' -u root:sudo -e BUCKET={env.BUCKET}"
         }
     }
     stages {
