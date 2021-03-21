@@ -10,7 +10,7 @@ The jenkins folder itself is meant to be used as a pre-step to start a Jenkins i
 - A hosted zone in route 53
 - An S3 bucket to store the remote state
 
-# For EKS
+### For EKS
 - AWS Account and IAM user with programatic access and an IAM policy attached to it
 - S3 bucket to store the remote state
 - Networking infrastructure in place (VPC, Subnets, etc)

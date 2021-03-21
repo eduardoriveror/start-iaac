@@ -12,7 +12,7 @@ pipeline {
     agent {
         docker {
             label "docker"
-            image "eduardoriveror/terragrunt-aws:v1.0 "
+            image "eduardoriveror/terragrunt-aws:v1.0"
             alwaysPull true
             args  "--entrypoint='' -u root:sudo"
         }
