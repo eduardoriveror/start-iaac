@@ -1,0 +1,6 @@
+subnets = ["subnet-xxxxxxxx", "subnet-xxxxxxxx", "subnet-xxxxxxxx"]
+vpc_id  = "vpc-subnet-xxxxxxxx"
+instance_type    = "t2.micro"
+region  =   "eu-west-1"
+my_ip   =   "your_ip"
+hosted_zone =  "dns_hosted_zone"
