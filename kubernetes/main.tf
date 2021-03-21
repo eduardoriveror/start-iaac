@@ -36,4 +36,8 @@ module "eks-cluster" {
       asg_max_size  = var.asg_max_size_prd
     }
   ]
+
+  workers_group_defaults = {
+    root_volume_type              = "gp2"
+  }
 }
