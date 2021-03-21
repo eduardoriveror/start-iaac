@@ -30,15 +30,16 @@ module "eks-cluster" {
   subnets         = var.subnets
   vpc_id          = var.vpc_id
 
-  cluster_enabled_log_types = {
-    [
+  cluster_enabled_log_types = [
+    {    
       "api",
       "audit",
       "authenticator",
       "controllerManager",
       "scheduler"
-      ]
-  }
+    }
+  ]
+
 
   worker_groups = [
     {
