@@ -27,7 +27,7 @@ pipeline {
         stage("Terragrunt Init") {
             steps {
                 withAWS(credentials: "terraform-userpass", region: "eu-west-1") {
-                    dir("${params.environment}") {
+                    dir("kubernetes") {
                         sh "aws --profile eks configure set aws_access_key_id ${env.AWS_ID_USR}"
                         sh "aws --profile eks configure set aws_secret_access_key ${env.AWS_ID_PSW}"
                         sh "terragrunt init"
