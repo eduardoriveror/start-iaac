@@ -13,7 +13,7 @@ pipeline {
     agent {
         docker {
             label "docker"
-            image "eduardoriveror/terragrunt-aws:v1.0"
+            image "eduardoriveror/terragrunt-aws:v1.1"
             alwaysPull true
             args  "--entrypoint='' -u root:sudo -e BUCKET={env.BUCKET}"
         }
@@ -57,6 +57,17 @@ pipeline {
                         dir("kubernetes") {
                             if (params.action == 'apply') {
                                 sh "terragrunt apply -input=false -auto-approve -var-file=${env.VAR_FILE}"
+                                // Installing tekton needed resources and dashboard
+                                sh "kubectl apply --kubeconfig=kubeconfig_start-cluster	-f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.notags.yaml"
+                                sh "kubectl create configmap config-artifact-pvc \
+                                    --from-literal=size=10Gi \
+                                    --from-literal=storageClassName=gp2 \
+                                    -o yaml -n tekton-pipelines \
+                                    --dry-run=client | kubectl replace -f -"
+                                sh "kubectl apply --kubeconfig=kubeconfig_start-cluster -f https://github.com/tektoncd/dashboard/releases/latest/download/tekton-dashboard-release.yaml"
+                                // Installing ArgoCD
+                                sh "kubectl create namespace argocd --kubeconfig=kubeconfig_start-cluster"
+                                sh "kubectl apply -n argocd --kubeconfig=kubeconfig_start-cluster -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
                             }
                         }
                     }
@@ -75,11 +86,6 @@ pipeline {
                     }
                 }
             }
-        }
-    }
-    post {
-        always {
-            cleanWs deleteDirs: true, notFailBuild: true
         }
     }
 }

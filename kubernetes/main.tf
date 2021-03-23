@@ -32,8 +32,7 @@ module "eks-cluster" {
 
   cluster_enabled_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
-
-  worker_groups = [
+ worker_groups = [
     {
       instance_type = var.instance_prd
       asg_max_size  = var.asg_max_size_prd

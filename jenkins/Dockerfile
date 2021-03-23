@@ -59,3 +59,12 @@ RUN \
 	chmod +x /usr/local/bin/terragrunt && \
 	# Check that it's installed
 	terragrunt --version
+
+################################
+# Install kubectl
+################################
+
+RUN curl -L https://dl.k8s.io/release/v1.19.0/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+  && chmod +x /usr/local/bin/kubectl \
+  && curl -o /usr/local/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator \
+  && chmod +x /usr/local/bin/aws-iam-authenticator
