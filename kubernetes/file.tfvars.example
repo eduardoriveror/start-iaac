@@ -7,6 +7,3 @@ instance_tst    =   "t2.micro"
 asg_max_size_tst    = 1
 region  =   "us-west-1"
 bucket_name = "s3_bucket_name"
-account_id  = "account_id"
-account_name =  "account_name"
-iam_user =  "authorized_iam_user"

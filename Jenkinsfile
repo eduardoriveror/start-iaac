@@ -63,7 +63,7 @@ pipeline {
                                     --from-literal=size=10Gi \
                                     --from-literal=storageClassName=gp2 \
                                     -o yaml -n tekton-pipelines \
-                                    --dry-run=client | kubectl replace -f -"
+                                    --dry-run=client | kubectl replace --kubeconfig=kubeconfig_start-cluster -f -"
                                 sh "kubectl apply --kubeconfig=kubeconfig_start-cluster -f https://github.com/tektoncd/dashboard/releases/latest/download/tekton-dashboard-release.yaml"
                                 // Installing ArgoCD
                                 sh "kubectl create namespace argocd --kubeconfig=kubeconfig_start-cluster"
