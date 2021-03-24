@@ -67,12 +67,13 @@ pipeline {
                                     --dry-run=client | kubectl replace --kubeconfig=kubeconfig_start-cluster -f -"
                                 sh "kubectl apply --kubeconfig=kubeconfig_start-cluster -f https://github.com/tektoncd/dashboard/releases/latest/download/tekton-dashboard-release.yaml"
                                 // Installing ArgoCD
-                                sh "kubectl create namespace argocd --kubeconfig=kubeconfig_start-cluster"
+                                sh "kubectl create namespace argocd --kubeconfig=kubeconfig_start-cluster -oyaml --dry-run=client | kubectl apply --kubeconfig=kubeconfig_start-cluster -f -"
                                 sh "kubectl apply -n argocd --kubeconfig=kubeconfig_start-cluster -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
                                 // Creating needed secrets and argo applications to create the pipeline and deploying the application
                                 sh "kubectl create secret docker-registry regcred --kubeconfig=kubeconfig_start-cluster \
-                                -n tekton-pipelines --docker-username=${env.REGCRED_USR} --docker-password=${env.REGCRED_PSW}"
-                                sh "kubectl apply -kubeconfig=kubeconfig_start-cluster -f tools/argocd/"
+                                -n tekton-pipelines --docker-username=${env.REGCRED_USR} --docker-password=${env.REGCRED_PSW} \
+                                --dry-run=client -oyaml | kubectl apply --kubeconfig=kubeconfig_start-cluster -f -"
+                                sh "kubectl apply --kubeconfig=kubeconfig_start-cluster -f ../tools/argocd/"
                             }
                         }
                     }
