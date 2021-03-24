@@ -45,3 +45,17 @@ terragrunt apply
 - Run the job in jenkins
 
 For more specific information about what to do with the EKS cluster once is done, check the [README](kubernetes/README.md) in the Kubernetes folder
+
+# Argo's installation steps
+
+- Create namespace:
+```
+kubectl create namespace argocd
+```
+
+- Install the needed argo components (Files in the installation folder)
+```
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+kubectl port-forward svc/argocd-server -n argocd 9096:443
