@@ -13,4 +13,4 @@ spec:
     path: tekton
   destination:
     server: https://kubernetes.default.svc
-    namespace: tekton-pipelines
+    namespace: start-dev
